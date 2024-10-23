@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <math.h>
+int main(){
+    unsigned char cadeiras = 4;
+    unsigned char posicao;
+    unsigned char mask0= 0x01;
+
+    
+    scanf("%hhu", &posicao);
+    getchar();
+    cadeiras = cadeiras & ~((mask0 << (posicao-1)));// cadeiras = 00000000
+    printf("%d\n", cadeiras); //cadeiras = 00000100
+    return 0;
+}
