@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int main(){
+    unsigned char cadeiras = 0;
+    unsigned char posicao;
+    unsigned char mask = 0x01;
+    
+    scanf("%hhu", &posicao);
+    getchar();
+        if ((cadeiras ^ (mask << (posicao-1))) < cadeiras){
+            return 1;
+        }
+
+    cadeiras = cadeiras | (mask << (posicao-1));// cadeiras = 00000000
+    printf("%d\n", cadeiras); //cadeiras = 00000100
+    return 0;
+}
