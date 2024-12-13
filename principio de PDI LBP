@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define N 7
+#define M 5
+
+int main(void){
+    int rows = N + 1;
+    int collums = M + 1;
+    srand(time(NULL));
+    unsigned int** x = (unsigned int**)malloc(N * sizeof(unsigned int*));
+    if (x == NULL){
+        exit(1);
+    }
+    for (int i; i < N=rows; i++){
+        x[i] = (unsigned int*)malloc(M * sizeof(unsigned int));
+         if (x[i] == NULL){
+        exit(1);
+    }
+    }  
+    for (int i =0 ; i< rows; i++){
+        for(int j = 0; j < collums; j++){
+            x[i][j] = rand()%255;
+        }
+    }
+        for (int i = 0; i <  )
+    ///...
+    /////////////////////////////////////////
+
+    for (int i = 0; i< N ; i++){
+        free(x[i]);
+    }
+    free(x);
+
+    ////////////////////////////////////////
+    return 0;
+}
