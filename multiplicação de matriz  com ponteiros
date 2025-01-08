@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define MX 10
+    int **alocar_memoria_matriz(int, int);
+    void preencher_matriz(int **, int, int);
+    void printar_matriz(int ** , int , int);
+    void mutiplicar_matrizes( int **, int **, int **, int, int);
+    
+
+
+int main(int argc, char **argv){
+    srand(time(NULL));
+    if (argc!=5){
+        printf("use o formato \n \t \t %s <valor1> <valor2> <valor3>...\n \n", argv[0]);
+        exit(1);
+    }
+    
+    int rows1 = atoi (*(argv +1));
+    int collums1 = atoi (*(argv +2));
+    int rows2 = atoi (*(argv +3));
+    int collums2 = atoi (*(argv +4));
+    int **Matriz1 = alocar_memoria_matriz(rows1,collums1);
+    int **Matriz2 = alocar_memoria_matriz(rows2,collums2);
+    srand(time(NULL));
+    preencher_matriz(Matriz1 , rows1 , collums1);
+    preencher_matriz(Matriz2 , rows2 , collums2);
+    printf("matriz1 gerada\n");
+    printf("matriz2 gerada\n");
+    printar_matriz(Matriz1 , rows1, collums1);
+    printf("\n \n");
+    printar_matriz(Matriz2 , rows2, collums2);
+    printf("\n \n");
+    int **Matriz3 = alocar_memoria_matriz(rows1 ,collums2);
+    mutiplicar_matrizes(Matriz1, Matriz2, Matriz3, rows1, collums1);
+    printar_matriz(Matriz3, rows1, collums1);
+    
+    return 0;
+
+}
+
+int **alocar_memoria_matriz(int rows, int collums){
+    int **pm = NULL;
+
+    if((!(pm = (int **) malloc(rows = sizeof(int *))))){
+        
+        return NULL;
+    }
+    for (int k=0; k< rows; k++){
+            if (!(pm[k] = (int *) malloc(collums = sizeof (int)))){
+                
+                return NULL;
+            }
+    }
+    return pm;
+}
+
+void preencher_matriz(int **pm, int rows , int collums){
+    for (int k = 0; k < rows; k++){
+        for (int j = 0; j<collums ; j++){
+            *(*(pm + k)+ j) = rand() % MX ;
+        }
+    }
+}
+void printar_matriz(int **pm, int rows , int collums){
+    for (int k = 0; k < rows; k++){
+        for (int j = 0; j<collums ; j++){
+            printf("%4d",*(*(pm + k)+ j));
+        }
+        printf("\n");
+    }
+}
+void mutiplicar_matrizes(int **pm1 ,int  **pm2,int **pm3,  int linhas1,int colunas1){
+    
+    for (int k = 0; k < linhas1; k++)
+    {
+        for (int j = 0; j < colunas1; j++)
+        {
+            *(*(pm3+k)+j) = *(*(pm1+k)+j) * *(*(pm2+k)+j);
+        }
+        
+    }
+    
+}
